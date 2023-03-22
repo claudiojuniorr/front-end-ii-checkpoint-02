@@ -2,6 +2,9 @@ const userEmailRef = document.querySelector('#inputEmail')
 const userPasswordRef = document.querySelector('#inputPassword')
 const buttonRef = document.querySelector('#loginButton')
 
+// Signup
+
+
 var formErrors = {
     inputEmail: true,
     inputPassword: true,
@@ -22,7 +25,7 @@ function validarField(inputRef){
     
     if(inputValid){
 
-       div.classList.remove('error')
+        div.classList.remove('error')
 
     }else{
 

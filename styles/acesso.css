@@ -63,12 +63,18 @@ button {
   font-weight: 400;
   font-size: 1em;
 }
+button:disabled{
+  opacity: 0.5;
+}
 
 .form-header {
   color: grey;
   font-size: 2em;
 }
-
+.form-login .div {
+  max-width: 500px;
+  width: 100%;
+}
 .form-login div small{
   display: none;
 }
