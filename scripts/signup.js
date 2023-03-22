@@ -62,10 +62,13 @@ function validityInput(inputRef){
 
 function passwordRequirements(password, elementRef){
     inputPassword(password)
-    let strongPassword = /[^a-zA-Z 0-9]+/g.test(password)
+    let specialCharacter = /[^a-zA-Z 0-9]+/g.test(password)
+    let numeral = /[0-9]/.test(password)
+    let uppercase = /[A-Z]/.test(password)
+    let lowerCase = /[a-z]/.test(password)
     const inputValid = elementRef.checkValidity()
     const elementFatherRef = elementRef.parentElement 
-    if (strongPassword){
+    if (specialCharacter && numeral && uppercase && lowerCase){
         elementFatherRef.classList.remove('error')
     }else{
         elementFatherRef.classList.add('error')
