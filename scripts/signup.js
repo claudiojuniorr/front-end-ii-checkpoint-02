@@ -5,12 +5,11 @@ const signupPasswordRef = document.querySelector('#inputPassword')
 const signupRepPasswordRef = document.querySelector('#inputRepPassword')
 const signupCreateButtonRef = document.querySelector('#createButton')
 
-var conta = {
-    nome: '',
-    sobrenome: '',
+var user = {
+    firstName: '',
+    lastName: '',
     email: '',
-    password: '',
-    repPassword: ''
+    password: ''
 }
 
 var validityFormError = {
@@ -22,23 +21,23 @@ var validityFormError = {
 }
 
 function inputNome(nome){
-    conta.nome = nome
+    user.firstName = nome
 }
 
 function inputSobrenome(sobrenome){
-    conta.sobrenome = sobrenome
+    user.lastName = sobrenome
 }
 
 function inputEmail(email){
-    conta.email = email
+    user.email = email
 }
 
 function inputPassword(password){
-    conta.password = password
+    user.password = password
 }
 
 function inputRepPassword(password){
-    conta.repPassword = password
+    let repPassword = password
 }
 
 function checkForm(){
@@ -77,17 +76,25 @@ function passwordRequirements(password, elementRef){
     checkForm()
 }
 
-function passwordConfirmation(password, elementRef){
+function passwordConfirmation(password, elementRef, elementComp){
     inputRepPassword(password)
-    const inputValid = elementRef.checkValidity()
+    let inputValid
+    if(password === elementComp.value){
+        inputValid = true
+    }else{
+        inputValid = false
+    }
     const elementFatherRef = elementRef.parentElement 
-    if (password === conta.password){
+    if (password === user.password){
         elementFatherRef.classList.remove('error')
+        signupCreateButtonRef.disabled = inputValid
     }else{
         elementFatherRef.classList.add('error')
+        signupCreateButtonRef.disabled = inputValid
     }
     validityFormError[elementRef.id] = !inputValid
     checkForm()
+    
 }
 
 function createLogin(event){
@@ -105,6 +112,6 @@ signupEmailRef.addEventListener('keyup', () => validityInput(signupEmailRef))
 
 signupPasswordRef.addEventListener('keyup', (event) => passwordRequirements(event.target.value, signupPasswordRef))
 
-signupRepPasswordRef.addEventListener('keyup', (event) => passwordConfirmation(event.target.value, signupRepPasswordRef))
+signupRepPasswordRef.addEventListener('keyup', (event) => passwordConfirmation(event.target.value, signupRepPasswordRef, signupPasswordRef))
 
 signupCreateButtonRef.addEventListener('click', (event) =>createLogin(event))
