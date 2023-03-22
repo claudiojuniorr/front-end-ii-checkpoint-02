@@ -65,10 +65,10 @@ function passwordRequirements(password, elementRef){
     let specialCharacter = /[^a-zA-Z 0-9]+/g.test(password)
     let numeral = /[0-9]/.test(password)
     let uppercase = /[A-Z]/.test(password)
-    let lowerCase = /[a-z]/.test(password)
+    let lowercase = /[a-z]/.test(password)
     const inputValid = elementRef.checkValidity()
     const elementFatherRef = elementRef.parentElement 
-    if (specialCharacter && numeral && uppercase && lowerCase){
+    if (specialCharacter && numeral && uppercase && lowercase && password.length > 7){
         elementFatherRef.classList.remove('error')
     }else{
         elementFatherRef.classList.add('error')
