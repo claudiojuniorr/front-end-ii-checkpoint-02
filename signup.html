@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do App</title>
-
   <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
   <link rel="stylesheet" href="./styles/acesso.css">
-
 </head>
-
 <body>
-
   <div class="left">
     <img src="./assets/pessoa-signup.png" alt="">
   </div>
@@ -42,9 +37,9 @@
         <input id="inputPassword" type="password" required minlength="8">
         <small> <p>Senha Fraca:</p> 
           <p>A senha deve ter no mínimo 8 caracteres</p>
-          <p>Adicione pelo menos 1 letra minúscula.</p>
-          <p>Adicione pelo menos 1 letra maiúscula.</p>
-          <p>Adicione pelo menos 1 dígito</p>
+          <p>Adicione pelo menos 1 letra minúscula</p>
+          <p>Adicione pelo menos 1 letra maiúscula</p>
+          <p>Adicione pelo menos 1 número</p>
           <p>Adicione pelo menos 1 caracter especial. Os caracteres especiais são: !@#$%^&*()-+</p>
         </small>
       </div>
@@ -53,9 +48,7 @@
         <input id="inputRepPassword" type="password" required minlength="8">
         <small>Repita sua senha corretamente</small>
       </div>
-
       <button id="createButton" type="submit" disabled>Criar conta</button>
-
     </form>
     <div class="ingressar">
       <a href="index.html">Já possui conta? Acesse aqui</a>
@@ -65,5 +58,4 @@
   <!-- <script src="./scripts/utils.js"></script> -->
   <script src="./scripts/signup.js" type="module"></script>
 </body>
-
 </html>
