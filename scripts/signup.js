@@ -99,6 +99,37 @@ function passwordConfirmation(password, elementRef, elementRepPassword){
 
 function createLogin(event){
     event.preventDefault()
+    const requestHeaders = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    var requestConfig = {
+        method: 'POST',
+        headers: requestHeaders,
+        body: JSON.stringify(user)
+    }
+    fetch('https://todo-api.ctd.academy/v1/users', requestConfig).then(
+        response => {
+            if(response.ok) {
+                swal("Você foi cadastrado com sucesso!", "Clique no botão para voltar para tela de login!", "success", {
+                    buttons: {
+                        catch: {
+                            text: "Voltar para tela de login!",
+                            value: "msg",
+                        }
+                    }
+                }).then((value) => {
+                    switch (value) {
+                        case "msg":
+                            window.location.href = './index.html'
+                            break
+                    }
+                }) 
+            } else {
+                swal("O usuário ja foi cadastrado!", "Clique no botão para tentar novamente!", "error")
+            }
+        }
+    )
 }
 
 signupNomeRef.addEventListener('keyup', (event) => inputNome(event.target.value))
