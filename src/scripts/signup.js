@@ -120,7 +120,7 @@ function createLogin(event){
                 }).then((value) => {
                     switch (value) {
                         case "msg":
-                            window.location.href = './index.html'
+                            window.location.href = '../../index.html'
                             break
                     }
                 }) 
