@@ -3,48 +3,72 @@ const userPasswordRef = document.querySelector('#inputPassword')
 const buttonRef = document.querySelector('#loginButton')
 
 // Signup
-
+var userLogin = {
+    email: '',
+    password: ''
+}
 
 var formErrors = {
     inputEmail: true,
     inputPassword: true,
 }
 
-function checkFormValidity(){
+function inputEmailLogin(email){
+    userLogin.email = email
+}
 
+function inputPasswordLogin(password){
+    userLogin.password = password
+}
+
+function checkFormValidity(){
     const formErrorsArray = Object.values(formErrors)
     const formValidity = formErrorsArray.every(item => item === false)
-
     buttonRef.disabled = !formValidity
 }
 
 function validarField(inputRef){
-
     const inputValid = inputRef.checkValidity()
-    const div =  inputRef.parentElement
-    
+    const div =  inputRef.parentElement   
     if(inputValid){
-
         div.classList.remove('error')
-
     }else{
-
         div.classList.add('error')
-
     }
-
     formErrors[inputRef.id] = !inputValid
-
     checkFormValidity()
 
 }
 
 function login(event){
-
     event.preventDefault()
-
+    const requestHeaders = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    var requestConfig = {
+        method: 'POST',
+        headers: requestHeaders,
+        body: JSON.stringify(userLogin)
+    }
+    fetch('https://todo-api.ctd.academy/v1/users/login', requestConfig).then(
+        response => {
+            if(response.ok) {
+                window.location.href = './src/pages/tarefas.html'
+            } else {
+                swal("Usuário não existe!", "Tente novamente!", "error")
+            }
+        }
+    )
 }
 
-userEmailRef.addEventListener('keyup',() => validarField(userEmailRef))
-userPasswordRef.addEventListener('keyup',() => validarField(userPasswordRef))
+//Email
+userEmailRef.addEventListener('keyup', (event) => inputEmailLogin(event.target.value))
+userEmailRef.addEventListener('keyup', () => validarField(userEmailRef))
+
+//Password
+userPasswordRef.addEventListener('keyup', (event) => inputPasswordLogin(event.target.value))
+userPasswordRef.addEventListener('keyup', () => validarField(userPasswordRef))
+
+//Botão
 buttonRef.addEventListener('click', (event) => login(event))
