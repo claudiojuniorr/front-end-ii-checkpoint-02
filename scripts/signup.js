@@ -65,21 +65,23 @@ function passwordRequirements(password, elementRef){
     let numeral = /[0-9]/.test(password)
     let uppercase = /[A-Z]/.test(password)
     let lowercase = /[a-z]/.test(password)
-    const inputValid = elementRef.checkValidity()
+    let inputValid
     const elementFatherRef = elementRef.parentElement 
     if (specialCharacter && numeral && uppercase && lowercase && password.length > 7){
         elementFatherRef.classList.remove('error')
+        inputValid = true
     }else{
         elementFatherRef.classList.add('error')
+        inputValid = false
     }
     validityFormError[elementRef.id] = !inputValid
     checkForm()
 }
 
-function passwordConfirmation(password, elementRef, elementComp){
+function passwordConfirmation(password, elementRef, elementRepPassword){
     inputRepPassword(password)
     let inputValid
-    if(password === elementComp.value){
+    if(password === elementRepPassword.value){
         inputValid = true
     }else{
         inputValid = false
@@ -87,10 +89,8 @@ function passwordConfirmation(password, elementRef, elementComp){
     const elementFatherRef = elementRef.parentElement 
     if (password === user.password){
         elementFatherRef.classList.remove('error')
-        signupCreateButtonRef.disabled = inputValid
     }else{
         elementFatherRef.classList.add('error')
-        signupCreateButtonRef.disabled = inputValid
     }
     validityFormError[elementRef.id] = !inputValid
     checkForm()
