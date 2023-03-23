@@ -93,8 +93,7 @@ function passwordConfirmation(password, elementRef, elementRepPassword){
         elementFatherRef.classList.add('error')
     }
     validityFormError[elementRef.id] = !inputValid
-    checkForm()
-    
+    checkForm() 
 }
 
 function createLogin(event){
@@ -131,18 +130,23 @@ function createLogin(event){
         }
     )
 }
-
+//Nome
 signupNomeRef.addEventListener('keyup', (event) => inputNome(event.target.value))
 signupNomeRef.addEventListener('keyup', () => validityInput(signupNomeRef))
 
+//Sobrenome
 signupSobrenomeRef.addEventListener('keyup', (event) => inputSobrenome(event.target.value))
 signupSobrenomeRef.addEventListener('keyup', () => validityInput(signupSobrenomeRef))
 
+//Email
 signupEmailRef.addEventListener('keyup', (event) => inputEmail(event.target.value))
 signupEmailRef.addEventListener('keyup', () => validityInput(signupEmailRef))
 
+//Password
 signupPasswordRef.addEventListener('keyup', (event) => passwordRequirements(event.target.value, signupPasswordRef))
 
+//Repetir Password
 signupRepPasswordRef.addEventListener('keyup', (event) => passwordConfirmation(event.target.value, signupRepPasswordRef, signupPasswordRef))
 
+//Botão
 signupCreateButtonRef.addEventListener('click', (event) =>createLogin(event))
