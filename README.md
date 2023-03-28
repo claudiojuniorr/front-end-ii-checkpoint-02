@@ -21,6 +21,7 @@ Aprendemos a como utilizar APIs, manipular o DOM e em como trabalhar com formulÃ
 - [@claudiojuniorr](https://github.com/claudiojuniorr/)
 - [@LuanALP](https://github.com/LuanALP)
 - [@Rafael-Cerqueira](https://github.com/Rafael-Cerqueira)
+- [@Rafael-Morales-Nardini](https://github.com/Rafael-Morales-Nardini)
 
 ## ReferÃªncia
 
