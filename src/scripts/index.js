@@ -54,7 +54,12 @@ function login(event){
     fetch('https://todo-api.ctd.academy/v1/users/login', requestConfig).then(
         response => {
             if(response.ok) {
-                window.location.href = './src/pages/tarefas.html'
+                response.json().then(
+                    token => {
+                        localStorage.setItem('token', token.jwt)
+                        window.location.href = './src/pages/tarefas.html'
+                    }
+                )
             } else {
                 swal("Usuário não existe!", "Tente novamente!", "error")
             }

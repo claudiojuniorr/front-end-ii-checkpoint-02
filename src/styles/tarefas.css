@@ -35,6 +35,10 @@ a {
   opacity: .4;
   margin-left: .7em;
 }
+.user{
+  display: flex;
+  align-items: center;
+}
 
 #closeApp{
   margin-left: 15px;
@@ -241,4 +245,33 @@ a {
 @keyframes trasparencia {
   0%{ opacity: 0.5;}
   100%{ opacity: 0.8;}
+}
+
+@media (max-width: 426px){
+  header{
+    justify-content: space-between;
+    padding: .3125rem;
+  }
+  .titulo-terminadas{
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 402px){
+  .nova-tarefa{
+    padding: 10px;
+  }
+  .nova-tarefa button{
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0;
+  }
+  .nova-tarefa input{
+    margin: 0 5px;
+  }
+  .not-done{
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0;
+  }
 }
