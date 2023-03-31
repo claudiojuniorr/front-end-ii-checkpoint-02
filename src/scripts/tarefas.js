@@ -150,9 +150,3 @@ tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 
 
 buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event), getTarefas())
-
-
-
-console.log('terminado', finishedTasks)
-
-console.log('pendente',unfinishedTasks)
