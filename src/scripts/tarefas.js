@@ -115,8 +115,6 @@ function editTask(id){
         if(task.id === id){
             tarefa.description = task.description
             tarefa.completed = true
-            finishedTasks.push(tarefa)
-            unfinishedTasks.indexOf(task)
         }
     }
     finishedTasks.push(tarefa)
@@ -154,7 +152,7 @@ tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event), getTarefas())
 
 
-/*
+
 console.log('terminado', finishedTasks)
 
-console.log('pendente',unfinishedTasks)*/
+console.log('pendente',unfinishedTasks)
