@@ -30,7 +30,6 @@ function formatDate(date){
 
 // mostrar tarefas
 function taskView(arrayFinish, elementFinish, arrayUnfinish, elementUnfinish){
-    
     elementFinish.innerHTML = ''
     for (let taskValue of arrayFinish){
         let dateFinish = taskValue.createdAt
@@ -63,6 +62,15 @@ function taskView(arrayFinish, elementFinish, arrayUnfinish, elementUnfinish){
     }   
 }
 
+// ordena o array de objetos
+function sortArray(array){
+    array.sort( (a, b) => {
+        if(a.id > b.id) return 1
+        if(a.id < b.id) return -1
+        return 0
+    })
+}
+
 // coletar tarefas do banco de dados
 function getTarefas(){
     finishedTasks = []
@@ -76,7 +84,6 @@ function getTarefas(){
         method: 'GET',
         headers: requestHeaders
     }
-
     fetch('https://todo-api.ctd.academy/v1/tasks', requestConfig).then(
         response => {
                 response.json().then(
@@ -88,12 +95,8 @@ function getTarefas(){
                                 unfinishedTasks.push(task)
                             }
                         }
-                        unfinishedTasks.reverse((a, b) => {
-                            return a.id - b.id
-                        })
-                        finishedTasks.reverse((a, b) => {
-                            return a.id - b.id
-                        })
+                        sortArray(unfinishedTasks)
+                        sortArray(finishedTasks)
                         taskView(finishedTasks, finishedTasksRef, unfinishedTasks, pendingTasksRef)
                     }
                 )
@@ -126,13 +129,16 @@ function buttonCreateTask(event){
 
 // modifica os status da tarefa
 function editTask(id){
+    const tarefaCompletada = {
+        description: '',
+        completed: true,
+    }
     for (task of unfinishedTasks){
         if(task.id === id){
-            tarefa.description = task.description
-            tarefa.completed = true
+            tarefaCompletada.description = task.description
+            tarefaCompletada.completed = true
         }
     }
-    finishedTasks.push(tarefa)
     const requestHeaders = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -141,7 +147,7 @@ function editTask(id){
     var requestConfig = {
         method: 'PUT',
         headers: requestHeaders,
-        body: JSON.stringify(tarefa)
+        body: JSON.stringify(tarefaCompletada)
     }
     fetch(`https://todo-api.ctd.academy/v1/tasks/${id}`, requestConfig).then(response => {
         if(response.ok){
@@ -171,6 +177,7 @@ function deleteTask(id){
         }
     })
 }
+
 getTarefas()
 
 tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
