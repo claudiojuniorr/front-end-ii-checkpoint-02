@@ -56,7 +56,6 @@ function validityInput(inputRef){
     }
     validityFormError[inputRef.id] = !inputValid
     checkForm()
-    
 }
 
 function passwordRequirements(password, elementRef){

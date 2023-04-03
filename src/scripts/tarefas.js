@@ -88,8 +88,12 @@ function getTarefas(){
                                 unfinishedTasks.push(task)
                             }
                         }
-                        unfinishedTasks.reverse()
-                        finishedTasks.reverse()
+                        unfinishedTasks.reverse((a, b) => {
+                            return a.id - b.id
+                        })
+                        finishedTasks.reverse((a, b) => {
+                            return a.id - b.id
+                        })
                         taskView(finishedTasks, finishedTasksRef, unfinishedTasks, pendingTasksRef)
                     }
                 )
