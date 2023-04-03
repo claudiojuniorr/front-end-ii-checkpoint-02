@@ -4,6 +4,7 @@ const buttonCreateTaskRef = document.querySelector('#createTask')
 const pendingTasksRef = document.querySelector('.tarefas-pendentes')
 const finishedTasksRef = document.querySelector('.tarefas-terminadas')
 const inputNewTaskRef = document.querySelector('#novaTarefa')
+const buttonTask = document.querySelectorAll('.tarefa .not-done')
 
 
 var tarefa = {
@@ -20,7 +21,7 @@ function inputTask(task){
     tarefa.description = task
 }
 
-// formatar data
+// Formata a data para DD/MM/AAAA
 function formatDate(date){
     let dia = date.substring(8, 10)
     let mes = date.substring(5, 7)
@@ -28,41 +29,25 @@ function formatDate(date){
     return `${dia}/${mes}/${ano}`
 }
 
-// mostrar tarefas
-function taskView(arrayFinish, elementFinish, arrayUnfinish, elementUnfinish){
-    elementFinish.innerHTML = ''
-    for (let taskValue of arrayFinish){
-        let dateFinish = taskValue.createdAt
-        elementFinish.innerHTML += `
+// Mostra as tarefas
+function taskView(array, element){
+    element.innerHTML = ''
+    for (let taskValue of array){
+        element.innerHTML += `
         <li class="tarefa">
-            <div class="not-done" onClick="deleteTask(${taskValue.id})"></div>
+            <div class="not-done">${taskValue.id}</div>
             <div class="descricao">
                 <p>ID:${taskValue.id}</p>
                 <p class="nome">${taskValue.description}</p>
                 <p class="timestamp"><span class="material-symbols-outlined">calendar_month</span>
-                ${formatDate(dateFinish)}</p>
+                ${formatDate(taskValue.createdAt)}</p>
             </div>
         </li>
         `
     }    
-    elementUnfinish.innerHTML = ''
-    for (let taskValue of arrayUnfinish){
-        let dateUnfinish = taskValue.createdAt
-        elementUnfinish.innerHTML += `
-        <li class="tarefa">
-            <div class="not-done" onClick="editTask(${taskValue.id})"></div>
-            <div class="descricao">
-                <p>ID:${taskValue.id}</p>
-                <p class="nome">${taskValue.description}</p>
-                <p class="timestamp"><span class="material-symbols-outlined">calendar_month</span>
-                ${formatDate(dateUnfinish)}</p>
-            </div>
-        </li>
-        `
-    }   
 }
 
-// ordena o array de objetos
+// Ordena o array de objetos
 function sortArray(array){
     array.sort( (a, b) => {
         if(a.id > b.id) return 1
@@ -71,7 +56,7 @@ function sortArray(array){
     })
 }
 
-// coletar tarefas do banco de dados
+// Solicita as tarefas
 function getTarefas(){
     finishedTasks = []
     unfinishedTasks = []
@@ -97,14 +82,15 @@ function getTarefas(){
                         }
                         sortArray(unfinishedTasks)
                         sortArray(finishedTasks)
-                        taskView(finishedTasks, finishedTasksRef, unfinishedTasks, pendingTasksRef)
+                        taskView(unfinishedTasks, pendingTasksRef)
+                        taskView(finishedTasks, finishedTasksRef)
                     }
                 )
         }
     )
 }
 
-// botão para criar uma tarefa
+// Botão para criar uma tarefa
 function buttonCreateTask(event){
     event.preventDefault()
     const requestHeaders = {
@@ -127,7 +113,7 @@ function buttonCreateTask(event){
     inputNewTaskRef.value = ''
 }
 
-// modifica os status da tarefa
+// Modifica os status da tarefa para terminado
 function editTask(id){
     const tarefaCompletada = {
         description: '',
@@ -158,7 +144,7 @@ function editTask(id){
     })
 }
 
-// apaga uma tarefa
+// Apaga uma tarefa
 function deleteTask(id){
     const requestHeaders = {
         'Accept': 'application/json',
@@ -180,7 +166,9 @@ function deleteTask(id){
 
 getTarefas()
 
+// Tarefa
 tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 
-
+// Referência do botão para criar uma tarefa
 buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event))
+
