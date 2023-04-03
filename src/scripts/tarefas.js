@@ -38,6 +38,7 @@ function taskView(arrayFinish, elementFinish, arrayUnfinish, elementUnfinish){
         <li class="tarefa">
             <div class="not-done" onClick="deleteTask(${taskValue.id})"></div>
             <div class="descricao">
+                <p>ID:${taskValue.id}</p>
                 <p class="nome">${taskValue.description}</p>
                 <p class="timestamp"><span class="material-symbols-outlined">calendar_month</span>
                 ${formatDate(dateFinish)}</p>
@@ -64,6 +65,8 @@ function taskView(arrayFinish, elementFinish, arrayUnfinish, elementUnfinish){
 
 // coletar tarefas do banco de dados
 function getTarefas(){
+    finishedTasks = []
+    unfinishedTasks = []
     const requestHeaders = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -85,6 +88,12 @@ function getTarefas(){
                                 unfinishedTasks.push(task)
                             }
                         }
+                        unfinishedTasks.reverse((a, b) => {
+                            return a.id - b.id
+                        })
+                        finishedTasks.reverse((a, b) => {
+                            return a.id - b.id
+                        })
                         taskView(finishedTasks, finishedTasksRef, unfinishedTasks, pendingTasksRef)
                     }
                 )
@@ -105,7 +114,13 @@ function buttonCreateTask(event){
         headers: requestHeaders,
         body: JSON.stringify(tarefa)
     }
-    fetch('https://todo-api.ctd.academy/v1/tasks', requestConfig)
+    fetch('https://todo-api.ctd.academy/v1/tasks', requestConfig).then(response => {
+        if(response.ok){
+            getTarefas()
+        }else{
+            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+        }
+    })
     inputNewTaskRef.value = ''
 }
 
@@ -128,7 +143,13 @@ function editTask(id){
         headers: requestHeaders,
         body: JSON.stringify(tarefa)
     }
-    fetch(`https://todo-api.ctd.academy/v1/tasks/${id}`, requestConfig)
+    fetch(`https://todo-api.ctd.academy/v1/tasks/${id}`, requestConfig).then(response => {
+        if(response.ok){
+            getTarefas()
+        }else{
+            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+        }
+    })
 }
 
 // apaga uma tarefa
@@ -142,11 +163,17 @@ function deleteTask(id){
         method: 'DELETE',
         headers: requestHeaders
     }
-    fetch(`https://todo-api.ctd.academy/v1/tasks/${id}`, requestConfig) 
+    fetch(`https://todo-api.ctd.academy/v1/tasks/${id}`, requestConfig).then(response => {
+        if(response.ok){
+            getTarefas()
+        }else{
+            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+        }
+    })
 }
-
+getTarefas()
 
 tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 
 
-buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event), getTarefas())
+buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event))
