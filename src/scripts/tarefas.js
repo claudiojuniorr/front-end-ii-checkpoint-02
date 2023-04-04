@@ -180,7 +180,9 @@ function deleteTask(id){
     })
 }
 
+
 function validarInputTask(event){
+    event.preventDefault()
     const inputTask = inputNewTaskRef.value
     if(inputTask.length >= 6){
         buttonCreateTask(event)
@@ -199,6 +201,4 @@ getTarefas()
 tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 
 // Referência do botão para criar uma tarefa
-buttonCreateTaskRef.addEventListener('click', (event) => {
-    validarInputTask(event)
-})
+buttonCreateTaskRef.addEventListener('click', (event) => validarInputTask(event))
