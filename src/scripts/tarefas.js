@@ -198,7 +198,7 @@ function validarInputTask(event){
         Swal.fire({
             icon: 'info',
             title: 'Atenção!',
-            text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 6 caracteres!',
+            text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 5 caracteres!',
         })
     }
 }
