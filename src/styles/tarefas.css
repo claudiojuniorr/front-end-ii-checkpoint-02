@@ -260,6 +260,19 @@ a {
   .titulo-terminadas{
     margin-left: 10px;
   }
+  .nova-tarefa input::placeholder{
+    font-size: .75rem;
+  }
+  .titulo-terminadas{
+    font-size: .875rem;
+  }
+  .descricao .nome{
+    font-size: 12px;
+  }
+  .descricao .timestamp{
+    font-size: 10px;
+    width: 60px;
+  }
 }
 
 @media (max-width: 402px){
@@ -274,9 +287,22 @@ a {
   .nova-tarefa input{
     margin: 0 5px;
   }
+  .nova-tarefa input::placeholder{
+    font-size: .75rem;
+  }
   .not-done{
     height: 1.25rem;
     width: 1.25rem;
     margin: 0;
+  }
+  .descricao .nome{
+    font-size: .75rem;
+  }
+  .descricao .timestamp{
+    font-size: .625rem;
+    width: 60px;
+  }
+  .titulo-terminadas{
+    font-size: .875rem;
   }
 }

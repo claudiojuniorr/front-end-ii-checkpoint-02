@@ -61,7 +61,11 @@ function login(event){
                     }
                 )
             } else {
-                swal("Usuário não existe!", "Tente novamente!", "error")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ops...',
+                    text: 'Usuário e/ou senha inválidos',
+                })
             }
         }
     )

@@ -4,8 +4,7 @@ const buttonCreateTaskRef = document.querySelector('#createTask')
 const pendingTasksRef = document.querySelector('.tarefas-pendentes')
 const finishedTasksRef = document.querySelector('.tarefas-terminadas')
 const inputNewTaskRef = document.querySelector('#novaTarefa')
-const buttonTask = document.querySelectorAll('.tarefa .not-done')
-
+const buttonTaskRef = document.querySelectorAll('#buttonTask')
 
 var tarefa = {
     description: '',
@@ -15,6 +14,7 @@ var tarefa = {
 var finishedTasks = []
 
 var unfinishedTasks = []
+
 
 
 function inputTask(task){
@@ -35,9 +35,8 @@ function taskView(array, element){
     for (let taskValue of array){
         element.innerHTML += `
         <li class="tarefa">
-            <div class="not-done">${taskValue.id}</div>
+            <div class="not-done" id="buttonTask"></div>
             <div class="descricao">
-                <p>ID:${taskValue.id}</p>
                 <p class="nome">${taskValue.description}</p>
                 <p class="timestamp"><span class="material-symbols-outlined">calendar_month</span>
                 ${formatDate(taskValue.createdAt)}</p>
@@ -53,6 +52,23 @@ function sortArray(array){
         if(a.id > b.id) return 1
         if(a.id < b.id) return -1
         return 0
+    })
+}
+
+function addEventListenerTask(tarefa){
+    const taskUnfinishRef = document.querySelectorAll('.tarefas-pendentes .tarefa')
+    const taskFinishRef = document.querySelectorAll('.tarefas-terminadas .tarefa')
+
+    const arrayTaskUnfinishRef = Array.from(taskUnfinishRef)
+    arrayTaskUnfinishRef.map((item, index) => {
+        const taskRef = item.children[0]
+        taskRef.addEventListener('click', () => editTask(unfinishedTasks[index].id))
+    })
+    
+    const arrayTaskFinishRef = Array.from(taskFinishRef)
+    arrayTaskFinishRef.map((item, index) => {
+        const taskRef = item.children[0]
+        taskRef.addEventListener('click', () => deleteTask(finishedTasks[index].id))
     })
 }
 
@@ -84,6 +100,7 @@ function getTarefas(){
                         sortArray(finishedTasks)
                         taskView(unfinishedTasks, pendingTasksRef)
                         taskView(finishedTasks, finishedTasksRef)
+                        addEventListenerTask(inputNewTaskRef)
                     }
                 )
         }
@@ -107,7 +124,11 @@ function buttonCreateTask(event){
         if(response.ok){
             getTarefas()
         }else{
-            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocorreu um erro, tente novamente!',
+            })
         }
     })
     inputNewTaskRef.value = ''
@@ -119,7 +140,7 @@ function editTask(id){
         description: '',
         completed: true,
     }
-    for (task of unfinishedTasks){
+    for (let task of unfinishedTasks){
         if(task.id === id){
             tarefaCompletada.description = task.description
             tarefaCompletada.completed = true
@@ -171,4 +192,3 @@ tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 
 // Referência do botão para criar uma tarefa
 buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event))
-
