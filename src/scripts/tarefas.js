@@ -188,8 +188,10 @@ function deleteTask(id){
     })
 }
 
+
 // valida o input
 function validarInputTask(event){
+    event.preventDefault()
     const inputTask = inputNewTaskRef.value
     if(inputTask.length >= 6){
         buttonCreateTask(event)
