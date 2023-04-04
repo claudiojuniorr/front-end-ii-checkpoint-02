@@ -155,7 +155,11 @@ function editTask(id){
         if(response.ok){
             getTarefas()
         }else{
-            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocorreu um erro, tente novamente!',
+            })
         }
     })
 }
@@ -175,7 +179,11 @@ function deleteTask(id){
         if(response.ok){
             getTarefas()
         }else{
-            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocorreu um erro, tente novamente!',
+            })
         }
     })
 }
