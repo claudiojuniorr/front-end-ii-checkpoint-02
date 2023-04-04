@@ -193,13 +193,13 @@ function deleteTask(id){
 function validarInputTask(event){
     event.preventDefault()
     const inputTask = inputNewTaskRef.value
-    if(inputTask.length >= 5){
+    if(inputTask.length >= 6){
         buttonCreateTask(event)
     }else{
         Swal.fire({
             icon: 'info',
             title: 'Atenção!',
-            text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 5 caracteres!',
+            text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 6 caracteres!',
         })
     }
 }
