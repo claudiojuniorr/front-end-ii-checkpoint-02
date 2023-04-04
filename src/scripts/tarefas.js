@@ -190,5 +190,11 @@ buttonCreateTaskRef.addEventListener('click', (event) => {
     const inputTask = inputNewTaskRef.value
     if(inputTask.length >= 6){
         buttonCreateTask(event)
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 6 caracteres!',
+          })
     }
 })
