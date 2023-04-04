@@ -180,13 +180,7 @@ function deleteTask(id){
     })
 }
 
-getTarefas()
-
-// Tarefa
-tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
-
-// Referência do botão para criar uma tarefa
-buttonCreateTaskRef.addEventListener('click', (event) => {
+function validarInputTask(event){
     const inputTask = inputNewTaskRef.value
     if(inputTask.length >= 6){
         buttonCreateTask(event)
@@ -197,4 +191,14 @@ buttonCreateTaskRef.addEventListener('click', (event) => {
             text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 6 caracteres!',
           })
     }
+}
+
+getTarefas()
+
+// Tarefa
+tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
+
+// Referência do botão para criar uma tarefa
+buttonCreateTaskRef.addEventListener('click', (event) => {
+    validarInputTask(event)
 })
