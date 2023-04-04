@@ -192,7 +192,7 @@ function deleteTask(id){
 function validarInputTask(event){
     event.preventDefault()
     const inputTask = inputNewTaskRef.value
-    if(inputTask.length >= 6){
+    if(inputTask.length >= 5){
         buttonCreateTask()
     }else{
         Swal.fire({
