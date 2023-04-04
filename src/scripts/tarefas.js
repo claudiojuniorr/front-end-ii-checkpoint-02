@@ -186,4 +186,9 @@ getTarefas()
 tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 
 // Referência do botão para criar uma tarefa
-buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event))
+buttonCreateTaskRef.addEventListener('click', (event) => {
+    const inputTask = inputNewTaskRef.value
+    if(inputTask.length >= 6){
+        buttonCreateTask(event)
+    }
+})
