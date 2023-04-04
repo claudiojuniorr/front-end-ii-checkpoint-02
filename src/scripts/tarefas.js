@@ -155,7 +155,11 @@ function editTask(id){
         if(response.ok){
             getTarefas()
         }else{
-            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocorreu um erro, tente novamente!',
+            })
         }
     })
 }
@@ -175,12 +179,17 @@ function deleteTask(id){
         if(response.ok){
             getTarefas()
         }else{
-            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocorreu um erro, tente novamente!',
+            })
         }
     })
 }
 
 
+// valida o input
 function validarInputTask(event){
     event.preventDefault()
     const inputTask = inputNewTaskRef.value
@@ -191,7 +200,7 @@ function validarInputTask(event){
             icon: 'error',
             title: 'Oops...',
             text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 6 caracteres!',
-          })
+        })
     }
 }
 
