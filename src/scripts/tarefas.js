@@ -4,7 +4,7 @@ const buttonCreateTaskRef = document.querySelector('#createTask')
 const pendingTasksRef = document.querySelector('.tarefas-pendentes')
 const finishedTasksRef = document.querySelector('.tarefas-terminadas')
 const inputNewTaskRef = document.querySelector('#novaTarefa')
-const buttonTaskRef = document.querySelectorAll('#buttonTask')
+
 
 var tarefa = {
     description: '',
@@ -27,7 +27,7 @@ function taskView(array, element){
         let date = new Date(taskValue.createdAt)
         element.innerHTML += `
         <li class="tarefa">
-            <div class="not-done" id="buttonTask"></div>
+            <div class="not-done"></div>
             <div class="descricao">
                 <p class="nome">${taskValue.description}</p>
                 <p class="timestamp"><span class="material-symbols-outlined">calendar_month</span>
@@ -41,8 +41,11 @@ function taskView(array, element){
 // Ordena o array de objetos
 function sortArray(array){
     array.sort( (a, b) => {
-        if(a.id > b.id) return 1
-        if(a.id < b.id) return -1
+        if(a.id > b.id){
+            return 1
+        }else if(a.id < b.id){
+            return -1
+        } 
         return 0
     })
 }
@@ -52,13 +55,13 @@ function addEventListenerTask(){
     const taskFinishRef = document.querySelectorAll('.tarefas-terminadas .tarefa')
 
     const arrayTaskUnfinishRef = Array.from(taskUnfinishRef)
-    arrayTaskUnfinishRef.map((item, index) => {
+    arrayTaskUnfinishRef.forEach((item, index) => {
         const taskRef = item.children[0]
         taskRef.addEventListener('click', () => editTask(unfinishedTasks[index].id))
     })
     
     const arrayTaskFinishRef = Array.from(taskFinishRef)
-    arrayTaskFinishRef.map((item, index) => {
+    arrayTaskFinishRef.forEach((item, index) => {
         const taskRef = item.children[0]
         taskRef.addEventListener('click', () => deleteTask(finishedTasks[index].id))
     })
@@ -92,7 +95,7 @@ function getTarefas(){
                         sortArray(finishedTasks)
                         taskView(unfinishedTasks, pendingTasksRef)
                         taskView(finishedTasks, finishedTasksRef)
-                        addEventListenerTask(inputNewTaskRef)
+                        addEventListenerTask()
                     }
                 )
         }
