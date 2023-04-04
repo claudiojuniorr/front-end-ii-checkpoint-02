@@ -188,10 +188,24 @@ function deleteTask(id){
     })
 }
 
+// valida o input
+function validarInputTask(event){
+    const inputTask = inputNewTaskRef.value
+    if(inputTask.length >= 6){
+        buttonCreateTask(event)
+    }else{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Para criar uma nova tarefa, é necessário que tenha pelo menos 6 caracteres!',
+        })
+    }
+}
+
 getTarefas()
 
 // Tarefa
 tarefasRef.addEventListener('keyup', (event) => inputTask(event.target.value))
 
 // Referência do botão para criar uma tarefa
-buttonCreateTaskRef.addEventListener('click', (event) => buttonCreateTask(event))
+buttonCreateTaskRef.addEventListener('click', (event) => validarInputTask(event))
