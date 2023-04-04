@@ -109,22 +109,24 @@ function createLogin(event){
     fetch('https://todo-api.ctd.academy/v1/users', requestConfig).then(
         response => {
             if(response.ok) {
-                swal("Você foi cadastrado com sucesso!", "Clique no botão para voltar para tela de login!", "success", {
-                    buttons: {
-                        catch: {
-                            text: "Voltar para tela de login!",
-                            value: "msg",
-                        }
-                    }
+                Swal.fire({
+                    icon: 'success',
+                    title: "Você foi cadastrado com sucesso!",
+                    text: "Clique no botão para voltar para tela de login!",
+                    confirmButtonText: 'Login'
                 }).then((value) => {
-                    switch (value) {
-                        case "msg":
-                            window.location.href = '../../index.html'
-                            break
+                    if(value.isConfirmed){
+                        window.location.href = '../../index.html'
                     }
                 }) 
             } else {
-                swal("O usuário ja foi cadastrado!", "Clique no botão para tentar novamente!", "error")
+                Swal.fire({
+                    icon: 'error',
+                    title: "Ops...",
+                    text: "Este usuário já está em uso.",
+                    confirmButtonText: 'Tentar Novamente'
+                })
+
             }
         }
     )

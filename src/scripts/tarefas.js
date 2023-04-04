@@ -125,7 +125,11 @@ function buttonCreateTask(event){
         if(response.ok){
             getTarefas()
         }else{
-            swal("Ops!", "Ocorreu um erro, tente novamente!", "error")
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ocorreu um erro, tente novamente!',
+            })
         }
     })
     inputNewTaskRef.value = ''
@@ -137,7 +141,7 @@ function editTask(id){
         description: '',
         completed: true,
     }
-    for (task of unfinishedTasks){
+    for (let task of unfinishedTasks){
         if(task.id === id){
             tarefaCompletada.description = task.description
             tarefaCompletada.completed = true
