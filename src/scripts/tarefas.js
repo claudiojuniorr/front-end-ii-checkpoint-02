@@ -16,30 +16,22 @@ var finishedTasks = []
 var unfinishedTasks = []
 
 
-
 function inputTask(task){
     tarefa.description = task
-}
-
-// Formata a data para DD/MM/AAAA
-function formatDate(date){
-    let dia = date.substring(8, 10)
-    let mes = date.substring(5, 7)
-    let ano = date.substring(0, 4)
-    return `${dia}/${mes}/${ano}`
 }
 
 // Mostra as tarefas
 function taskView(array, element){
     element.innerHTML = ''
     for (let taskValue of array){
+        let date = new Date(taskValue.createdAt)
         element.innerHTML += `
         <li class="tarefa">
             <div class="not-done" id="buttonTask"></div>
             <div class="descricao">
                 <p class="nome">${taskValue.description}</p>
                 <p class="timestamp"><span class="material-symbols-outlined">calendar_month</span>
-                ${formatDate(taskValue.createdAt)}</p>
+                ${new Intl.DateTimeFormat('pt-BR').format(date)}</p>
             </div>
         </li>
         `
@@ -55,7 +47,7 @@ function sortArray(array){
     })
 }
 
-function addEventListenerTask(tarefa){
+function addEventListenerTask(){
     const taskUnfinishRef = document.querySelectorAll('.tarefas-pendentes .tarefa')
     const taskFinishRef = document.querySelectorAll('.tarefas-terminadas .tarefa')
 
