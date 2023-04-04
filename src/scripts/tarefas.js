@@ -103,8 +103,7 @@ function getTarefas(){
 }
 
 // Botão para criar uma tarefa
-function buttonCreateTask(event){
-    event.preventDefault()
+function buttonCreateTask(){
     const requestHeaders = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -193,7 +192,7 @@ function validarInputTask(event){
     event.preventDefault()
     const inputTask = inputNewTaskRef.value
     if(inputTask.length >= 6){
-        buttonCreateTask(event)
+        buttonCreateTask()
     }else{
         Swal.fire({
             icon: 'info',
