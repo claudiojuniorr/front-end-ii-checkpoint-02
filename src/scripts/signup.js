@@ -74,41 +74,49 @@ function checkPassword(elementFatherRef, special, numeral, uppercase,lowercase, 
     }else if (special && numeral && uppercase || special && numeral && lowercase || special && numeral && password.length > 7 || numeral && password.length > 7 && uppercase){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 75
         inputValid = false
     }else if (special && uppercase && lowercase || special && uppercase && password.length > 7 || special && password.length > 7 && lowercase){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 75
         inputValid = false
     }else if (numeral && uppercase && lowercase || numeral && lowercase && password.length > 7 || uppercase && lowercase && password.length > 7){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 75
         inputValid = false
     }else if (special && password.length > 7 || numeral && lowercase || special && numeral){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 50
         inputValid = false
     }else if (special && uppercase || numeral && uppercase || uppercase && lowercase || special && lowercase){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 50
         inputValid = false
     }else if (numeral && password.length > 7 || uppercase && password.length > 7 || lowercase && password.length > 7){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 50
         inputValid = false
     }else if (special || numeral || uppercase || lowercase || password.length > 7){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 25
         inputValid = false
     }else{
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
+        valueProgressRef.classList.remove('progress')
         valueProgressRef.value = 0
         inputValid = false
     }
