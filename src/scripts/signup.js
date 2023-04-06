@@ -135,7 +135,6 @@ function passwordRequirements(password, elementRef){
 
 function passwordConfirmation(password, elementRef, elementRepPassword){
     inputRepPassword(password)
-    let inputValid
     if(password === elementRepPassword.value){
         inputValid = true
     }else{

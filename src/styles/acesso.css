@@ -160,6 +160,17 @@ progress::-webkit-progress-value{
   text-decoration:line-through
 }
 
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.flex div{
+  padding: 0 5px;
+}
+
 @media (max-width: 767px){
   body{
     flex-direction: column;
