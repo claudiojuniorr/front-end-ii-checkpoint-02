@@ -4,6 +4,8 @@ const signupEmailRef = document.querySelector('#inputEmail')
 const signupPasswordRef = document.querySelector('#inputPassword')
 const signupRepPasswordRef = document.querySelector('#inputRepPassword')
 const signupCreateButtonRef = document.querySelector('#createButton')
+const valueProgressRef = document.querySelector('progress')
+
 
 var user = {
     firstName: '',
@@ -19,6 +21,8 @@ var validityFormError = {
     inputPassword: true,
     inputRepPassword: true,
 }
+
+var inputValid
 
 function inputNome(nome){
     user.firstName = nome
@@ -50,12 +54,64 @@ function validityInput(inputRef){
     const inputValid = inputRef.checkValidity()
     const elementFatherRef = inputRef.parentElement 
     if(inputValid){
-        elementFatherRef.classList.remove('error')
+        elementFatherRef.classList.add('sucesso')
     }else {
+        elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
     }
     validityFormError[inputRef.id] = !inputValid
     checkForm()
+}
+
+function checkPassword(elementFatherRef, special, numeral, uppercase,lowercase, password){
+    
+    if (special && numeral && uppercase && lowercase && password.length > 7){
+        elementFatherRef.classList.remove('error')
+        elementFatherRef.classList.add('sucesso')
+        valueProgressRef.classList.add('progress')
+        valueProgressRef.value = 100
+        inputValid = true
+    }else if (special && numeral && uppercase || special && numeral && lowercase || special && numeral && password.length > 7 || numeral && password.length > 7 && uppercase){
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 75
+        inputValid = false
+    }else if (special && uppercase && lowercase || special && uppercase && password.length > 7 || special && password.length > 7 && lowercase){
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 75
+        inputValid = false
+    }else if (numeral && uppercase && lowercase || numeral && lowercase && password.length > 7 || uppercase && lowercase && password.length > 7){
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 75
+        inputValid = false
+    }else if (special && password.length > 7 || numeral && lowercase || special && numeral){
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 50
+        inputValid = false
+    }else if (special && uppercase || numeral && uppercase || uppercase && lowercase || special && lowercase){
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 50
+        inputValid = false
+    }else if (numeral && password.length > 7 || uppercase && password.length > 7 || lowercase && password.length > 7){
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 50
+        inputValid = false
+    }else if (special || numeral || uppercase || lowercase || password.length > 7){
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 25
+        inputValid = false
+    }else{
+        elementFatherRef.classList.remove('sucesso')
+        elementFatherRef.classList.add('error')
+        valueProgressRef.value = 0
+        inputValid = false
+    }
 }
 
 function passwordRequirements(password, elementRef){
@@ -64,15 +120,9 @@ function passwordRequirements(password, elementRef){
     let numeral = /[0-9]/.test(password)
     let uppercase = /[A-Z]/.test(password)
     let lowercase = /[a-z]/.test(password)
-    let inputValid
+    
     const elementFatherRef = elementRef.parentElement 
-    if (specialCharacter && numeral && uppercase && lowercase && password.length > 7){
-        elementFatherRef.classList.remove('error')
-        inputValid = true
-    }else{
-        elementFatherRef.classList.add('error')
-        inputValid = false
-    }
+    checkPassword(elementFatherRef, specialCharacter, numeral, uppercase, lowercase, password)
     validityFormError[elementRef.id] = !inputValid
     checkForm()
 }
@@ -87,8 +137,9 @@ function passwordConfirmation(password, elementRef, elementRepPassword){
     }
     const elementFatherRef = elementRef.parentElement 
     if (password === user.password){
-        elementFatherRef.classList.remove('error')
+        elementFatherRef.classList.add('sucesso')
     }else{
+        elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
     }
     validityFormError[elementRef.id] = !inputValid
@@ -151,3 +202,4 @@ signupRepPasswordRef.addEventListener('keyup', (event) => passwordConfirmation(e
 
 //Botão
 signupCreateButtonRef.addEventListener('click', (event) =>createLogin(event))
+
