@@ -64,7 +64,6 @@ function validityInput(inputRef){
 }
 
 function checkPassword(elementFatherRef, special, numeral, uppercase,lowercase, password){
-    
     if (special && numeral && uppercase && lowercase && password.length > 7){
         elementFatherRef.classList.remove('error')
         elementFatherRef.classList.add('sucesso')
@@ -128,7 +127,6 @@ function passwordRequirements(password, elementRef){
     let numeral = /[0-9]/.test(password)
     let uppercase = /[A-Z]/.test(password)
     let lowercase = /[a-z]/.test(password)
-    
     const elementFatherRef = elementRef.parentElement 
     checkPassword(elementFatherRef, specialCharacter, numeral, uppercase, lowercase, password)
     validityFormError[elementRef.id] = !inputValid
