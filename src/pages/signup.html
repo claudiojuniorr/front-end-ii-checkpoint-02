@@ -20,33 +20,39 @@
       <div class="div">
         <label for="nome">Nome:</label>
         <input id="inputNome" type="text" required minlength="4" maxlength="20">
-        <small>Preencha o campo Nome</small>
+        <small class="info">Preencha o campo Nome</small>
       </div>
       <div class="div">
         <label for="sobrenome">Sobrenome:</label>
         <input id="inputSobrenome" type="text" required minlength="6" maxlength="50">
-        <small>Preencha o campo Sobrenome</small> 
+        <small class="info">Preencha o campo Sobrenome</small> 
       </div>
       <div class="div">
         <label for="email">Email:</label>
         <input id="inputEmail" type="email" required minlength="6">
-        <small>Preencha o campo E-mail</small>
+        <small class="info">Preencha o campo E-mail</small>
       </div>
       <div class="div">
         <label for="password">Senha:</label>
         <input id="inputPassword" type="password" required minlength="8">
-        <small> <p>Senha Fraca:</p> 
-          <p>A senha deve ter no mínimo 8 caracteres</p>
-          <p>Adicione pelo menos 1 letra minúscula</p>
-          <p>Adicione pelo menos 1 letra maiúscula</p>
-          <p>Adicione pelo menos 1 número</p>
-          <p>Adicione pelo menos 1 caracter especial. Os caracteres especiais são: !@#$%^&*()-+</p>
+        <small> <progress value="10" max="100"></progress>
+        <p>Sua senha deve conter:
+          <b>Mínimo 8 caracteres</b>
+          ,
+          <b>Letras Maiúsculas</b>
+          ,
+          <b>Minúsculas</b>
+          ,
+          <b>Números</b>
+          e
+          <b>Caracteres Especiais</b>
+        </p>
         </small>
       </div>
       <div class="div">
         <label for="password">Repetir senha:</label>
         <input id="inputRepPassword" type="password" required minlength="8">
-        <small>As senhas não correspondem</small>
+        <small class="info">As senhas não correspondem</small>
       </div>
       <button id="createButton" type="submit" disabled>Criar conta</button>
     </form>
