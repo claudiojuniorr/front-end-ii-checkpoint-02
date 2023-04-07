@@ -165,6 +165,7 @@ progress::-webkit-progress-value{
   flex-direction: row;
   align-items: center;
   padding: 5px 0;
+  font-size: .8em;
 }
 
 .flex div{
