@@ -121,23 +121,28 @@ function passwordStrength(password) {
             inputValid = true
             break
         case 4:
+            elementFatherRef.classList.remove("sucesso")
+            elementFatherRef.classList.add("error")
+            valueProgressRef.classList.remove("progress")
+            valueProgressRef.value = 80
+            break
         case 3:
             elementFatherRef.classList.remove("sucesso")
             elementFatherRef.classList.add("error")
             valueProgressRef.classList.remove("progress")
-            valueProgressRef.value = 75
+            valueProgressRef.value = 60
             break
         case 2:
             elementFatherRef.classList.remove("sucesso")
             elementFatherRef.classList.add("error")
             valueProgressRef.classList.remove("progress")
-            valueProgressRef.value = 50
+            valueProgressRef.value = 40
             break
         case 1:
             elementFatherRef.classList.remove("sucesso")
             elementFatherRef.classList.add("error")
             valueProgressRef.classList.remove("progress")
-            valueProgressRef.value = 25
+            valueProgressRef.value = 20
             break
         default:
             elementFatherRef.classList.remove("sucesso")
