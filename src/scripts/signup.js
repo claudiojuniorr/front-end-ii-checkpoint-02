@@ -5,7 +5,7 @@ const signupPasswordRef = document.querySelector('#inputPassword')
 const signupRepPasswordRef = document.querySelector('#inputRepPassword')
 const signupCreateButtonRef = document.querySelector('#createButton')
 const valueProgressRef = document.querySelector('progress')
-
+const conditionRef = document.querySelectorAll('small #condicao p b')
 
 var user = {
     firstName: '',
@@ -22,7 +22,7 @@ var validityFormError = {
     inputRepPassword: true,
 }
 
-var inputValid
+var inputValid = false
 
 function inputNome(nome){
     user.firstName = nome
@@ -63,73 +63,107 @@ function validityInput(inputRef){
     checkForm()
 }
 
-function checkPassword(elementFatherRef, special, numeral, uppercase,lowercase, password){
-    if (special && numeral && uppercase && lowercase && password.length > 7){
-        elementFatherRef.classList.remove('error')
-        elementFatherRef.classList.add('sucesso')
-        valueProgressRef.classList.add('progress')
-        valueProgressRef.value = 100
-        inputValid = true
-    }else if (special && numeral && uppercase || special && numeral && lowercase || special && numeral && password.length > 7 || numeral && password.length > 7 && uppercase){
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 75
-        inputValid = false
-    }else if (special && uppercase && lowercase || special && uppercase && password.length > 7 || special && password.length > 7 && lowercase){
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 75
-        inputValid = false
-    }else if (numeral && uppercase && lowercase || numeral && lowercase && password.length > 7 || uppercase && lowercase && password.length > 7){
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 75
-        inputValid = false
-    }else if (special && password.length > 7 || numeral && lowercase || special && numeral){
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 50
-        inputValid = false
-    }else if (special && uppercase || numeral && uppercase || uppercase && lowercase || special && lowercase){
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 50
-        inputValid = false
-    }else if (numeral && password.length > 7 || uppercase && password.length > 7 || lowercase && password.length > 7){
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 50
-        inputValid = false
-    }else if (special || numeral || uppercase || lowercase || password.length > 7){
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 25
-        inputValid = false
-    }else{
-        elementFatherRef.classList.remove('sucesso')
-        elementFatherRef.classList.add('error')
-        valueProgressRef.classList.remove('progress')
-        valueProgressRef.value = 0
-        inputValid = false
+// verifica se tem caractere especial
+function specialChar(password) {
+    const regex = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
+    return regex.test(password)
+}
+
+// verifica se tem número
+function numeral(password) {
+    const regex = /[0-9]/
+    return regex.test(password)
+}
+
+// verifica se tem letra maiúscula
+function uppercase(password) {
+    const regex = /[A-Z]/
+    return regex.test(password)
+}
+
+// verifica se tem letra minúscula
+function lowercase(password) {
+    const regex = /[a-z]/
+    return regex.test(password)
+}
+
+// calcula a pontuação da senha com base nos requisitos e retorna um valor entre 0 e 5
+function getPasswordStrength(password) {
+    let score = 0
+    if (password.length >= 8) {
+        score += 1
+    }
+    if (specialChar(password)) {
+        score += 1
+    }
+    if (numeral(password)) {
+        score += 1
+    }
+    if (uppercase(password)) {
+        score += 1
+    }
+    if (lowercase(password)) {
+        score += 1
+    }
+    return score
+}
+
+// atualiza os requisitos com base na pontuação da senha e retorna um valor booleano indicando se a senha é válida ou não
+function passwordStrength(password) {
+    const strength = getPasswordStrength(password)
+    const elementFatherRef = signupPasswordRef.parentElement 
+    switch (strength) {
+        case 5:
+            elementFatherRef.classList.remove("error")
+            elementFatherRef.classList.add("sucesso")
+            valueProgressRef.classList.add("progress")
+            valueProgressRef.value = 100
+            inputValid = true
+            break
+        case 4:
+        case 3:
+            elementFatherRef.classList.remove("sucesso")
+            elementFatherRef.classList.add("error")
+            valueProgressRef.classList.remove("progress")
+            valueProgressRef.value = 75
+            break
+        case 2:
+            elementFatherRef.classList.remove("sucesso")
+            elementFatherRef.classList.add("error")
+            valueProgressRef.classList.remove("progress")
+            valueProgressRef.value = 50
+            break
+        case 1:
+            elementFatherRef.classList.remove("sucesso")
+            elementFatherRef.classList.add("error")
+            valueProgressRef.classList.remove("progress")
+            valueProgressRef.value = 25
+            break
+        default:
+            elementFatherRef.classList.remove("sucesso")
+            elementFatherRef.classList.add("error")
+            valueProgressRef.classList.remove("progress")
+            valueProgressRef.value = 0
     }
 }
 
-function passwordRequirements(password, elementRef){
+function markedCondition(password){
+    const conditionArray = Array.from(conditionRef)
+    const conditions = [password.length >= 8, uppercase(password), lowercase(password), numeral(password), specialChar(password)]
+    conditions.forEach((condition, index) => {
+        if(condition){
+            conditionArray[index].classList.add('line')
+        }else{
+            conditionArray[index].classList.remove('line')
+        }
+    })
+}
+
+function passwordRequirements(password){
     inputPassword(password)
-    let specialCharacter = /[^a-zA-Z 0-9]+/g.test(password)
-    let numeral = /[0-9]/.test(password)
-    let uppercase = /[A-Z]/.test(password)
-    let lowercase = /[a-z]/.test(password)
-    const elementFatherRef = elementRef.parentElement 
-    checkPassword(elementFatherRef, specialCharacter, numeral, uppercase, lowercase, password)
-    validityFormError[elementRef.id] = !inputValid
+    passwordStrength(password)
+    markedCondition(password)
+    validityFormError[signupPasswordRef.id] = !inputValid
     checkForm()
 }
 
@@ -200,11 +234,12 @@ signupEmailRef.addEventListener('keyup', (event) => inputEmail(event.target.valu
 signupEmailRef.addEventListener('keyup', () => validityInput(signupEmailRef))
 
 //Password
-signupPasswordRef.addEventListener('keyup', (event) => passwordRequirements(event.target.value, signupPasswordRef))
+signupPasswordRef.addEventListener('keyup', (event) => passwordRequirements(event.target.value))
 
 //Repetir Password
 signupRepPasswordRef.addEventListener('keyup', (event) => passwordConfirmation(event.target.value, signupRepPasswordRef, signupPasswordRef))
 
 //Botão
 signupCreateButtonRef.addEventListener('click', (event) =>createLogin(event))
+
 
