@@ -170,15 +170,18 @@ progress {
   height: 6px;
   border-radius: 12px;
   overflow: hidden;
+  transition: width 0.5s ease-in-out;
 }
 progress::-webkit-progress-bar{
   background-color: var(--app-grey);
 }
 progress::-webkit-progress-value{
   background-color: red;
+  transition: width 0.5s ease-in-out;
 }
 .progress::-webkit-progress-value{
   background-color: green !important;
+  transition: width 0.5s ease-in-out;
 }
 
 .line {
