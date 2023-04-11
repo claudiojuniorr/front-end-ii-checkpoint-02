@@ -1,6 +1,7 @@
 const userEmailRef = document.querySelector('#inputEmail')
 const userPasswordRef = document.querySelector('#inputPassword')
 const buttonRef = document.querySelector('#loginButton')
+const olhoRef = document.querySelector('#senhaOlho')
 
 // Signup
 var userLogin = {
@@ -29,7 +30,7 @@ function checkFormValidity(){
 
 function validarField(inputRef){
     const inputValid = inputRef.checkValidity()
-    const div =  inputRef.parentElement   
+    const div =  inputRef.parentElement.parentElement
     if(inputValid){
         div.classList.remove('error')
     }else{
@@ -39,6 +40,18 @@ function validarField(inputRef){
     checkFormValidity()
 
 }
+
+function showPassword(event, element, eye) {
+    event.preventDefault()
+    if (element.type === "password") {
+        element.type = "text"
+        eye.innerText = 'visibility_off'
+    } else {
+        element.type = "password"
+        eye.innerText = 'visibility'
+    }
+}
+
 
 function login(event){
     event.preventDefault()
@@ -81,3 +94,5 @@ userPasswordRef.addEventListener('keyup', () => validarField(userPasswordRef))
 
 //Botão
 buttonRef.addEventListener('click', (event) => login(event))
+
+olhoRef.addEventListener('click', (event) => showPassword(event, userPasswordRef, olhoRef))

@@ -36,7 +36,10 @@
       </div>
       <div class="div">
         <label for="password">Senha:</label>
-        <input id="inputPassword" type="password" required minlength="8">
+        <div class="input-group">
+          <input  id="inputPassword" class="mostrar-icon" type="password" required minlength="8">
+          <span class="material-symbols-outlined olho">visibility</span>
+        </div>
         <small> 
           <progress value="10" max="100"></progress>
           <div class="flex">
@@ -59,7 +62,10 @@
       </div>
       <div class="div">
         <label for="password">Repetir senha:</label>
-        <input id="inputRepPassword" type="password" required minlength="8">
+        <div class="input-group">
+          <input  id="inputRepPassword" class="mostrar-icon" type="password" required minlength="8">
+          <span class="material-symbols-outlined olho" id="repetir">visibility</span>
+        </div>
         <small class="info">As senhas não correspondem</small>
       </div>
       <button id="createButton" type="submit" disabled>Criar conta</button>

@@ -7,6 +7,8 @@
   <title>To-Do App</title>
   <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
   <link rel="stylesheet" href="./src/styles/acesso.css">
+  <!-- ----------------------------- Google Fonts ----------------------------- -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
   <div class="left">
@@ -20,13 +22,18 @@
       <h1>Acessar</h1>  
       <div class="div">
         <label for="email">Email:</label>
-        <input id="inputEmail" type="email" required minlength="9">
-        <small>Preencha o campo E-mail</small>
+        <div class="container-password">
+          <input id="inputEmail" type="email" required minlength="9">
+        </div>
+        <small class="info">Preencha o campo E-mail</small>
       </div>
       <div class="div"> 
         <label for="password">Senha:</label>
-        <input id="inputPassword" type="password" required minlength="8">
-        <small>Preencha o campo senha corretamente</small>
+        <div class="input-group">
+          <input  id="inputPassword" class="mostrar-icon" type="password" required minlength="8">
+          <span class="material-symbols-outlined olho" id="senhaOlho">visibility</span>
+        </div>
+        <small class="info">Preencha o campo senha corretamente</small>
       </div> 
       <button id="loginButton" type="submit" disabled>Acessar</button>
     </form>
