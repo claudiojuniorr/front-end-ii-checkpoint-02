@@ -65,7 +65,7 @@ input[type="password"]::-ms-clear {
   position: absolute;
   top: 50%;
   right: 10px;
-  transform: translateY(-47%);
+  transform: translateY(-35%);
   cursor: pointer;
   font-size: .625rem;
 }
@@ -120,9 +120,23 @@ button:disabled{
   color: red;
   display: block;
 }
-.form-login div.error small {
+.form-login div.error .info-password{
+  color: red;
+}
+.form-login div.error .info {
   color: red;
   display: block;
+  animation-name: small-error;
+  animation-duration: .3s;
+}
+
+@keyframes small-error {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .form-login div.sucesso .info{
@@ -186,6 +200,14 @@ progress::-webkit-progress-value{
 
 .line {
   text-decoration:line-through
+}
+
+.info-password {
+  display: block !important;
+}
+
+.flex .material-symbols-outlined{
+  font-size: 1.25rem;
 }
 
 .flex {
