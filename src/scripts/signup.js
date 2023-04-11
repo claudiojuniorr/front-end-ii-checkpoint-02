@@ -6,6 +6,8 @@ const signupRepPasswordRef = document.querySelector('#inputRepPassword')
 const signupCreateButtonRef = document.querySelector('#createButton')
 const valueProgressRef = document.querySelector('progress')
 const conditionRef = document.querySelectorAll('small #condicao p b')
+const olhoRef = document.querySelector('.olho')
+const olhoRepRef = document.querySelector('#repetir')
 
 var user = {
     firstName: '',
@@ -111,7 +113,7 @@ function getPasswordStrength(password) {
 // atualiza os requisitos com base na pontuação da senha e retorna um valor booleano indicando se a senha é válida ou não
 function passwordStrength(password) {
     const strength = getPasswordStrength(password)
-    const elementFatherRef = signupPasswordRef.parentElement 
+    const elementFatherRef = signupPasswordRef.parentElement.parentElement
     switch (strength) {
         case 5:
             elementFatherRef.classList.remove("error")
@@ -164,6 +166,18 @@ function markedCondition(password){
     })
 }
 
+function showPassword(event, element, eye) {
+    event.preventDefault()
+    if (element.type === "password") {
+        element.type = "text"
+        eye.innerText = 'visibility_off'
+    } else {
+        element.type = "password"
+        eye.innerText = 'visibility'
+    }
+}
+
+
 function passwordRequirements(password){
     inputPassword(password)
     passwordStrength(password)
@@ -179,10 +193,10 @@ function passwordConfirmation(password, elementRef, elementRepPassword){
     }else{
         inputValid = false
     }
-    const elementFatherRef = elementRef.parentElement 
+    const elementFatherRef = elementRef.parentElement.parentElement
     if (password === user.password){
         elementFatherRef.classList.add('sucesso')
-    }else{
+    }else if (password !== user.password || password !== null){
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
     }
@@ -245,6 +259,7 @@ signupPasswordRef.addEventListener('keyup', (event) => passwordRequirements(even
 signupRepPasswordRef.addEventListener('keyup', (event) => passwordConfirmation(event.target.value, signupRepPasswordRef, signupPasswordRef))
 
 //Botão
-signupCreateButtonRef.addEventListener('click', (event) =>createLogin(event))
+signupCreateButtonRef.addEventListener('click', (event) => createLogin(event))
 
-
+olhoRef.addEventListener('click', (event) => showPassword(event, signupPasswordRef, olhoRef))
+olhoRepRef.addEventListener('click', (event) => showPassword(event, signupRepPasswordRef, olhoRepRef))

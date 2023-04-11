@@ -39,7 +39,6 @@ form:after {
   background: linear-gradient(var(--primary), var(--secondary));
 }
 
-
 input {
   width: 100%;
   padding: .4em .5em;
@@ -51,6 +50,24 @@ input {
 input:focus {
   outline: none;
   border: 1px solid lightgrey;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none !important;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group .olho {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-47%);
+  cursor: pointer;
+  font-size: .625rem;
 }
 
 label {
@@ -77,8 +94,15 @@ button:disabled{
   color: grey;
   font-size: 2em;
 }
+.form-login{
+  width: 45%;
+}
 .form-login .div {
   max-width: 500px;
+  width: 100%;
+}
+
+.form-login .div .container-password{
   width: 100%;
 }
 .form-login div small{
@@ -92,6 +116,7 @@ button:disabled{
   border-color: red;
 }
 .form-login div.error .info {
+  font-size: .6875rem;
   color: red;
   display: block;
 }
@@ -165,7 +190,8 @@ progress::-webkit-progress-value{
   flex-direction: row;
   align-items: center;
   padding: 5px 0;
-  font-size: .8em;
+  font-size: .625rem;
+  word-break: break-word;
 }
 
 .flex div{
