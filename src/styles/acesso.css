@@ -239,6 +239,7 @@ progress::-webkit-progress-value{
     width: 100%;
   }
   .form-login {
+    max-width: 300px;
     width: 100%;
   }
   .form-login div.info {
