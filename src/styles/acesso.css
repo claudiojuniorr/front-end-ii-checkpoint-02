@@ -96,6 +96,7 @@ button:disabled{
 }
 .form-login{
   width: 45%;
+  min-width: 35%;
 }
 .form-login .div {
   max-width: 500px;
@@ -223,17 +224,24 @@ progress::-webkit-progress-value{
   padding: 0 5px;
 }
 
-@media (max-width: 767px){
+@media (max-width: 768px){
   body{
     flex-direction: column;
     align-items: center;
   }
   .left{
+    max-width: 100%;
+    min-width: 50%;
     width: 100%;
   }
   .right{
+    padding: 0 20px;
     width: 100%;
-    padding: 0 10px;
   }
-
+  .form-login {
+    width: 100%;
+  }
+  .form-login div.info {
+    font-size: 0.8rem;
+  }
 }

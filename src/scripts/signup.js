@@ -196,7 +196,7 @@ function passwordConfirmation(password, elementRef, elementRepPassword){
     const elementFatherRef = elementRef.parentElement.parentElement
     if (password === user.password){
         elementFatherRef.classList.add('sucesso')
-    }else if (password !== user.password || password !== null){
+    }else{
         elementFatherRef.classList.remove('sucesso')
         elementFatherRef.classList.add('error')
     }
