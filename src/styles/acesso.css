@@ -65,7 +65,7 @@ input[type="password"]::-ms-clear {
   position: absolute;
   top: 50%;
   right: 10px;
-  transform: translateY(-47%);
+  transform: translateY(-35%);
   cursor: pointer;
   font-size: .625rem;
 }
